@@ -1,21 +1,18 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { getAuth } from "firebase/auth";
+ 
 const firebaseConfig = {
-  apiKey: "AIzaSyAIgDMb5q3YhHJZumkkzsB3aUxup3WjuDY",
-  authDomain: "lingo-bingo-2fa04.firebaseapp.com",
-  projectId: "lingo-bingo-2fa04",
-  storageBucket: "lingo-bingo-2fa04.firebasestorage.app",
-  messagingSenderId: "481100752873",
-  appId: "1:481100752873:web:038ce452c5d1cdb1d2cd78",
-  measurementId: "G-J23B8BZ1G5"
+  apiKey: "AIzaSyCq_hZSGRvY98d6PSLy80WPvi4Y_w_L348",
+  authDomain: "lingo-bingo-auth-f56f0.firebaseapp.com",
+  projectId: "lingo-bingo-auth-f56f0",
+  storageBucket: "lingo-bingo-auth-f56f0.firebasestorage.app",
+  messagingSenderId: "867056173326",
+  appId: "1:867056173326:web:31ab07876163e01e23575f"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export default app;
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
+export default auth;

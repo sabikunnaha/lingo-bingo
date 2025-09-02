@@ -1,16 +1,35 @@
 
-
+import { useContext } from "react";
 import { FcVoicePresentation } from "react-icons/fc";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Header = () => {
+
+  const { user } = useContext(AuthContext);
+
   const links = <>
-    <li><NavLink className={ ({isActive})=> isActive? 'text-white bg-blue-400 font-bold rounded-full' : 'font-bold'} to='/'>Home</NavLink></li>
-    <li><NavLink className={ ({isActive})=> isActive? 'text-white bg-blue-400 font-bold rounded-full' : 'font-bold'}  to='learning/'>Start Learning</NavLink></li>
-    <li><NavLink className={ ({isActive})=> isActive? 'text-white bg-blue-400 font-bold rounded-full' : 'font-bold'} to='tutorial/'>Tutorial</NavLink></li>
-    <li><NavLink className={ ({isActive})=> isActive? 'text-white bg-blue-400 font-bold rounded-full' : 'font-bold'} to='about/'>About Us</NavLink></li>
+    <li><NavLink className={({ isActive }) => isActive ? 'text-white bg-blue-400 font-bold rounded-full' : 'font-bold'} to='/'>Home</NavLink></li>
+    <li><NavLink className={({ isActive }) => isActive ? 'text-white bg-blue-400 font-bold rounded-full' : 'font-bold'} to='/learning'>Start Learning</NavLink></li>
+    <li><NavLink className={({ isActive }) => isActive ? 'text-white bg-blue-400 font-bold rounded-full' : 'font-bold'} to='/tutorial'>Tutorial</NavLink></li>
+    <li><NavLink className={({ isActive }) => isActive ? 'text-white bg-blue-400 font-bold rounded-full' : 'font-bold'} to='/about'>About Us</NavLink></li>
 
   </>
+  //Greeting User
+
+  const hour = new Date().getHours();
+
+  let greeting = "";
+  if (hour < 12) {
+    greeting = `☀️ Good Morning, ${user?.displayName}! Your presence just made this place brighter.`;
+  } else if (hour < 18) {
+    greeting = `🌤️ Good Afternoon, ${user?.displayName}! Your presence just made this place brighter.`;
+  } else {
+    greeting = `🌙 Good Evening, ${user?.displayName}! Your presence just made this place brighter.`;
+  }
+
+
+
   return (
     <div className="navbar  fixed z-20 px-9 ">
       <div className="navbar-start">
@@ -34,7 +53,11 @@ const Header = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn text-white rounded-full bg-blue-400">Login</a>
+        {
+          user.email? <h1 className="text-2xl p-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white shadow-lg rounded-b-2xl font-bold animate-pulse">{greeting}</h1> :
+          <Link to={'/login'} className="btn text-white rounded-full bg-blue-400">Login</Link>
+        }
+        
       </div>
     </div>
   );

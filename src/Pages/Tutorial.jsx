@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Tutorial = () => {
+const Tutorial = ({text}) => {
     return (
         <div>
             Varias Tutorial heare
+        {text}
         </div>
     );
 };
