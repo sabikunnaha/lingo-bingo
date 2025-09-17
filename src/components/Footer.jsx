@@ -37,7 +37,7 @@ const Footer = () => {
       </div>
 
       <div className="border-t bg-blue-400 border-white mt-10 pt-6 text-center items-center pb-2 text-sm text-white">
-        © {new Date().getFullYear()} Lingo Bingo. All rights reserved.
+        © {new Date().getFullYear()}Lingo Bingo. All rights reserved. Made with ❤️ for Japanese learners.
       </div>
     </footer>
   );

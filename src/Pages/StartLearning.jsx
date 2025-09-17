@@ -1,15 +1,24 @@
-import { useNavigate } from "react-router-dom";
+
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const StartLearning = () => {
-
     const navigate = useNavigate();
+    const allData = useLoaderData()
+    console.log(allData);
 
 
     const lessons = Array.from({ length: 10 }, (_, i) => i + 1);
 
 
-    const handleLessonClick = (lessonNo) => {
-        navigate(`/lesson/${lessonNo}`);
+    const handleLessonClick = (lesson) => {
+
+        const matchlesson = allData.find(data => data.lesson_no === lesson);
+        if (matchlesson) {
+            navigate(`/lesson/${matchlesson.lesson_no}`);
+        }
+
+        // const lessonsData = allData.filter(lessonData => lessonData.lesson_no === lesson)
+        // console.log(lessonsData);
     };
 
 
@@ -20,6 +29,8 @@ const StartLearning = () => {
             alert("Please login to view more tutorials.");
         }
     };
+
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100 p-8">
             {/* Page Title */}

@@ -1,12 +1,12 @@
-import { div } from 'framer-motion/client';
-import React, { useContext } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import { useForm } from 'react-hook-form';
+import { useContext } from 'react';
 
 const Register = () => {
 
     const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     const {
@@ -21,7 +21,9 @@ const Register = () => {
         console.log(data.Password)
         createUser(Email, Password)
             .then(result => {
-                console.log(result);
+                 if(result.user){
+                    navigate('/')
+                 }
             })
             .catch((error) => {
                 const errorCode = error.code;

@@ -6,10 +6,10 @@ import AboutUs from "../Pages/AboutUs";
 import Layout from "../Layout/Layout";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import Lessons from "../components/Lessons";
+import PrivatRoute from "./PrivatRoute";
 
-
-
-const router = createBrowserRouter([
+ const router = createBrowserRouter([
     {
         path: '/',
         element: <Layout></Layout>,
@@ -20,7 +20,9 @@ const router = createBrowserRouter([
             },
             {
                 path: '/learning',
-                element: <StartLearning></StartLearning>
+                element: <StartLearning></StartLearning>,
+                loader: ()=> { return fetch("/Database/allData.json");
+                }
             },
             {
                 path: '/tutorial',
@@ -37,9 +39,17 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/lesson/:id',
+                element: <PrivatRoute>
+                    <Lessons></Lessons>,
+                </PrivatRoute>,
+                loader: ()=> { return fetch("/Database/allData.json");
+                }
+                
+
             }
-
-
         ]
 
 
