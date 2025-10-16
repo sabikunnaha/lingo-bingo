@@ -43,7 +43,7 @@ const Header = () => {
   return (
     <div>
 
-      <div className="navbar bg-gradient-to-br from-indigo-50 to-purple-100 fixed z-20 backdrop-blur bg-white/50">
+      <div className="navbar bg-gradient-to-br from-indigo-50 to-purple-100 fixed z-20 backdrop-blur px-11">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

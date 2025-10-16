@@ -8,7 +8,7 @@ const Success = () => {
                     Our <span className="text-blue-600">Achievements</span>
                 </h2>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-14">
                     {/* User Count */}
                     <div className="p-6 bg-gray-50 rounded-2xl shadow hover:shadow-lg transition">
                         <h3 className="text-4xl font-bold text-blue-600">
