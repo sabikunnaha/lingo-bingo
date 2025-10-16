@@ -1,7 +1,12 @@
 
+import { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { Bounce,toast ,ToastContainer } from "react-toastify";
 
 const StartLearning = () => {
+
+    const { user } = useContext(AuthContext)
     const navigate = useNavigate();
     const allData = useLoaderData()
     console.log(allData);
@@ -23,16 +28,18 @@ const StartLearning = () => {
 
 
     const handleViewMore = () => {
+
         if (user) {
-            navigate("/tutorials");
+            navigate("/tutorial");
         } else {
-            alert("Please login to view more tutorials.");
+            toast('🦄 Please login to view more tutorials.');
         }
     };
 
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100 p-8">
+        <div className="min-h-screen bg-gradient-to-br from-indigo-200 to-purple-300 p-8">
+            <ToastContainer/>
             {/* Page Title */}
             <h1 className="text-3xl font-bold text-center text-indigo-700 mb-10">
                 Let’s Learn

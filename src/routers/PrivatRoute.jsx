@@ -6,10 +6,10 @@ const PrivatRoute = ({ children }) => {
 
   const { user, loader } = useContext(AuthContext);
   const location = useLocation();
-  console.log(location)
 
   if (loader) {
-    return <h2>Loading...</h2>
+    return <div className='bg-gradient-to-br from-indigo-50 to-purple-100 flex  justify-center items-center'><span className="loading loading-ring loading-lg"></span></div>
+
   }
 
   if (!user) {

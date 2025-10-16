@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/firebase.config";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 
 export const AuthContext = createContext(null);
 
@@ -8,12 +8,20 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loader, setloader] = useState(true)
 
-    console.log(loader)
 
     const createUser = (email, password) => {
         setloader(true);
         return createUserWithEmailAndPassword(auth, email, password);
 
+    }
+
+    // Update user
+
+    const updateUserProfile = (Name, image) => {
+      return  updateProfile(auth.currentUser, {
+            displayName: Name, 
+            photoURL:  image
+        }) 
     }
 
     //Login 
@@ -47,7 +55,7 @@ const AuthProvider = ({ children }) => {
             } else {
                 setUser(null);
             }
-            setloader(false); // ✅ সবসময় শেষে loader false করতে হবে
+            setloader(false);
         });
 
         return () => unsubscribe();
@@ -58,6 +66,7 @@ const AuthProvider = ({ children }) => {
         loginUser,
         singInWithGoogle,
         logoutUser,
+        updateUserProfile,
         loader,
         user,
 

@@ -1,11 +1,15 @@
 
-
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../AuthProvider/AuthProvider';
+import { toast, ToastContainer } from 'react-toastify';
+import { LuEyeClosed } from "react-icons/lu";
+import { BsEyeSlash } from "react-icons/bs";
 
 const Login = () => {
+
+    const [showpassword, setShowPassword]= useState(false)
 
      const {loginUser,singInWithGoogle } = useContext(AuthContext);
      const navigate = useNavigate();
@@ -29,9 +33,9 @@ const Login = () => {
                 })
                 .catch((error) => {
                     const errorCode = error.code;
-                    alert(errorCode);
-                    const errorMessage = error.message;
-                    alert(errorMessage);
+                      toast('invalid email or password')
+                   
+                   
                 });
     
         }
@@ -47,7 +51,8 @@ const Login = () => {
 
 
     return (
-        <div className='min-h-screen flex justify-center items-center'>
+        <div className='min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100 flex justify-center items-center'>
+            <ToastContainer></ToastContainer>
             <div className="w-full max-w-md p-8  space-y-3 rounded-xl bg-gray-200  text-gray-800">
                 <h1 className="text-2xl font-bold text-center text-blue-400">Login</h1>
                 <form onSubmit={handleSubmit(onSubmit)} noValidate="" action="" className="space-y-6">
@@ -56,10 +61,17 @@ const Login = () => {
                         <input {...register("Email", { required: true })} type="text"  id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md  border-gray-300  bg-gray-50  text-gray-800 focus:border-violet-600" />
                         {errors.Email && <span>This field is required</span>}
                     </div>
-                    <div className="space-y-1 text-sm">
+                    <div className="space-y-1 text-sm relative">
                         <label htmlFor="password" className="block  text-gray-600">Password</label>
-                        <input {...register("Password", { required: true })} type="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600" />
+                        <input {...register("Password", { required: true })} 
+                        type={showpassword?'text':'password'} 
+                        id="password"
+                         placeholder="Password"
+                          className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800 focus:border-violet-600" />
                         {errors.Password && <span>This field is required</span>}
+
+                        <button type="button" onClick={()=>{setShowPassword(!showpassword)}}
+                         className='absolute right-6 top-10'> {showpassword?<BsEyeSlash/> : <LuEyeClosed />} </button>
                         <div className="flex justify-end text-xs  text-gray-600">
                             <a rel="noopener noreferrer" href="#">Forgot Password?</a>
                         </div>

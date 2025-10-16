@@ -1,42 +1,55 @@
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import { useForm } from 'react-hook-form';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Register = () => {
 
     const { createUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState('')
 
 
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm();
 
     const onSubmit = (data) => {
+
+        setErrorMessage('')
+
         const { Email, Password } = data;
         console.log(data.Password)
+        
+        if (Password.length < 6) {
+            toast('Length must be at least 6 character')
+        }
+        else if (!/[A-Z]/.test(Password)) {
+            toast("Password must contain at least one uppercase letter.");
+        } else if (!/[a-z]/.test(Password)) {
+            toast("Password must contain at least one lowercase letter.");
+        }
+
         createUser(Email, Password)
             .then(result => {
-                 if(result.user){
+                if (result.user) {
                     navigate('/')
-                 }
+                }
             })
             .catch((error) => {
                 const errorCode = error.code;
-                alert(errorCode);
+                setErrorMessage(errorCode);
                 const errorMessage = error.message;
                 console.log(errorMessage);
-                // ..
             });
 
     }
 
     return (
-        <div className='min-h-screen flex justify-center items-center'>
+        <div className='min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100 flex justify-center items-center'>
             <div className="w-full max-w-md p-8  space-y-3 rounded-xl bg-gray-200  text-gray-800">
                 <h1 className="text-2xl font-bold text-center text-blue-400">Register</h1>
                 <form onSubmit={handleSubmit(onSubmit)} noValidate="" action="" className="space-y-6">
@@ -63,6 +76,9 @@ const Register = () => {
                     </div>
                     <button className="block w-full p-3 text-center rounded-sm  text-gray-50  bg-blue-400">Register</button>
                 </form>
+                {
+                    <p className='text-center text-sm text-red-600'>{errorMessage}</p>
+                }
                 <div className="flex items-center pt-4 space-x-1">
                     <div className="flex-1 h-px sm:w-16  bg-gray-300"></div>
                     <p className="px-3 text-sm  text-gray-600">Login with social accounts</p>
@@ -85,6 +101,9 @@ const Register = () => {
                         </svg>
                     </button>
                 </div>
+                {/* toastify for show error message */}
+                <ToastContainer />
+
                 <p className="text-sm text-center sm:px-6  text-gray-600">Already have an account? Please
                     <Link to='/login' rel="noopener noreferrer" href="#" className="underline text-xl  text-blue-500">Login</Link>
                 </p>

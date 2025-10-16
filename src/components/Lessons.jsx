@@ -29,15 +29,7 @@ const Lessons = () => {
         }
     }
 
-
-    // "pronunciation": "kiku",
-    // "meaning": "to listen / to ask",
-    // "part_of_speech": "verb",
-    // "difficulty": "medium",
-    // "lesson_no": 2,
-    // "when_to_say": "Used for listening or asking questions.",
-    // "example": "音楽を聞きます。 (ongaku o kikimasu.) - I listen to music."
-    // ( word, meaning,  when to say , example ) 
+ 
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-200 to-purple-100 dark:bg-none py-12 px-6">

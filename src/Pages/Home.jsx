@@ -1,16 +1,16 @@
 import AboutSecsion from "../components/AboutSecsion";
 import Banner from "../components/Banner";
 import Success from "../components/Success";
-import AboutUs from "./AboutUs";
- 
 
 
 const Home = () => {
     return (
-        <div className="lg:max-w-7xl mx-auto py-4">
+        <div className=" bg-gradient-to-br from-indigo-50 to-purple-100 ">
             
         
-               <Banner></Banner>
+              <div className="max-w-7xl mx-auto p-5 min-h-screen ">
+                 <Banner></Banner>
+              </div>
         
            <AboutSecsion></AboutSecsion>
              <Success></Success>

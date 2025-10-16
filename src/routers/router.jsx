@@ -8,8 +8,10 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import Lessons from "../components/Lessons";
 import PrivatRoute from "./PrivatRoute";
+import MyProfile from "../Pages/MyProfile";
+import UpdateProfile from "../components/UpdateProfile";
 
- const router = createBrowserRouter([
+const router = createBrowserRouter([
     {
         path: '/',
         element: <Layout></Layout>,
@@ -21,12 +23,15 @@ import PrivatRoute from "./PrivatRoute";
             {
                 path: '/learning',
                 element: <StartLearning></StartLearning>,
-                loader: ()=> { return fetch("/Database/allData.json");
+                loader: () => {
+                    return fetch("/Database/allData.json");
                 }
             },
             {
                 path: '/tutorial',
-                element: <Tutorial></Tutorial>
+                element: <PrivatRoute>
+                            <Tutorial></Tutorial>
+                         </PrivatRoute>
             },
             {
                 path: '/about',
@@ -43,12 +48,21 @@ import PrivatRoute from "./PrivatRoute";
             {
                 path: '/lesson/:id',
                 element: <PrivatRoute>
-                    <Lessons></Lessons>,
-                </PrivatRoute>,
-                loader: ()=> { return fetch("/Database/allData.json");
+                            <Lessons></Lessons>,
+                        </PrivatRoute>,
+                loader: () => {
+                    return fetch("/Database/allData.json");
                 }
-                
-
+            },
+            {
+                path: '/profile',
+                element: <PrivatRoute>
+                             <MyProfile></MyProfile>
+                        </PrivatRoute>
+            },
+            {
+                path:'/updateProfile',
+                element: <UpdateProfile></UpdateProfile>
             }
         ]
 

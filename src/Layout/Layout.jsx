@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 const Layout = () => {
     return (
         <div>
-           <div className='h-16'>
+           <div className='h-16 '>
              <Header></Header>
            </div>
             <Outlet></Outlet>
